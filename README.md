@@ -13,3 +13,21 @@ This Rails app demonstrates an issue with constant loading (and reloading). To r
 - Wait ...
 - Wait ...
 - It never loads :S
+
+
+To debug a little bit:
+
+- Open `config/application.rb`, uncomment line 34
+- Repeat the process above
+
+You'll see that `SomeNamespace` is repeatedly added to `ActiveSupport::Dependencies.autoloaded_constants`:
+
+```
+Debug autoloaded constants: ["ApplicationHelper", "ApplicationController", "ConstantIssuesController", "SomeNamespace", "SomeNamespace", "SomeNamespace"]
+ApplicationHelper => nil
+ApplicationController => nil
+ConstantIssuesController => nil
+SomeNamespace => nil
+SomeNamespace => nil
+SomeNamespace => nil
+```
